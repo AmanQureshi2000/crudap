@@ -8,8 +8,13 @@ RUN apt-get update && apt-get install -y \
 # Enable Apache mod_rewrite for clean URLs
 RUN a2enmod rewrite
 
-# Copy your project (index.php is in root)
+# Copy your project (NO .env copy needed)
 COPY . /var/www/html/
-COPY .env /var/www/html/.env
-# (Optional) Set proper permissions
-RUN chown -R www-data:www-data /var/www/html
+
+# Create empty .env file to prevent the "file not found" error
+# Your Render env vars will still work via getenv() or $_ENV
+RUN touch /var/www/html/.env && \
+    chown -R www-data:www-data /var/www/html
+
+# Optional: If your app needs write permissions
+RUN chmod -R 755 /var/www/html

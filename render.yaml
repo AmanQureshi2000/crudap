@@ -1,9 +1,9 @@
 services:
   - type: web
     name: todo-app
-    runtime: image
-    buildCommand: ""
-    startCommand: "php -S 0.0.0.0:10000"
+    runtime: docker
+    repo: https://github.com/AmanQureshi2000/crudap
+    plan: free
     envVars:
       - key: DB_HOST
         fromDatabase:

@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y \
 # Enable Apache mod_rewrite for clean URLs
 RUN a2enmod rewrite
 
-# Set the document root and copy your project
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-COPY . /var/www/html
+# Copy your project (index.php is in root)
+COPY . /var/www/html/
+
+# (Optional) Set proper permissions
+RUN chown -R www-data:www-data /var/www/html

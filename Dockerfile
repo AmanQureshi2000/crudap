@@ -10,6 +10,6 @@ RUN a2enmod rewrite
 
 # Copy your project (index.php is in root)
 COPY . /var/www/html/
-
+COPY .env /var/www/html/.env
 # (Optional) Set proper permissions
 RUN chown -R www-data:www-data /var/www/html
